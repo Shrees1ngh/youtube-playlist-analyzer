@@ -190,21 +190,21 @@ export default function Home() {
       
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 relative">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <Video className={`w-12 h-12 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-            <h1 className={`text-5xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-950'}`}>
+        <div className="text-center mb-8 sm:mb-12 relative">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <Video className={`w-10 h-10 sm:w-12 sm:h-12 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+            <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-950'}`}>
               YouTube Playlist Analyzer
             </h1>
           </div>
-          <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg px-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             Calculate watch time and plan your study sessions
           </p>
           
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className={`absolute right-0 top-0 p-3 rounded-xl transition-all duration-300 group ${
+            className={`absolute right-0 top-0 p-2 sm:p-3 rounded-xl transition-all duration-300 group ${
               isDark 
                 ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' 
                 : 'bg-white hover:bg-black text-gray-700 hover:text-white shadow-lg group-hover:shadow-xl'
@@ -213,7 +213,7 @@ export default function Home() {
           >
             {isDark ? (
               <>
-                <Sun className={`w-7 h-7 transition-all duration-500 ${
+                <Sun className={`w-6 h-6 sm:w-7 sm:h-7 transition-all duration-500 ${
                   isAnimating ? 'animate-sun-rise rotate-180' : ''
                 } group-hover:rotate-180 group-hover:animate-sun-rise`} />
                 <div className={`absolute inset-0 ${
@@ -222,7 +222,7 @@ export default function Home() {
               </>
             ) : (
               <>
-                <Moon className={`w-7 h-7 transition-all duration-500 ${
+                <Moon className={`w-6 h-6 sm:w-7 sm:h-7 transition-all duration-500 ${
                   isAnimating ? 'animate-moon-rise' : ''
                 } group-hover:animate-moon-rise`} />
               </>
@@ -231,21 +231,21 @@ export default function Home() {
         </div>
 
         {/* Input Section */}
-        <div className={`rounded-2xl shadow-lg p-8 mb-8 ${
+        <div className={`rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 ${
           isDark ? 'bg-gray-800' : 'bg-white'
         }`}>
-          <label className={`block text-sm font-semibold mb-3 ${
+          <label className={`block text-sm font-semibold mb-2 sm:mb-3 ${
             isDark ? 'text-gray-100' : 'text-gray-900'
           }`}>
             Playlist URL
           </label>
-          <div className="flex gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <input
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://www.youtube.com/playlist?list=..."
-              className={`flex-1 px-4 py-3 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all ${
+              className={`w-full sm:flex-1 px-4 py-3 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all text-sm sm:text-base ${
                 isDark 
                   ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
                   : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
@@ -255,7 +255,7 @@ export default function Home() {
             <button
               onClick={analyze}
               disabled={loading || !url}
-              className={`px-8 py-3 rounded-lg font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 ${
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
                 loading ? 'bg-gray-400' : 'bg-red-600 hover:bg-red-700 active:scale-95'
               }`}
             >
@@ -274,7 +274,7 @@ export default function Home() {
           </div>
 
           {/* Range Inputs */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className={`block text-sm font-semibold mb-2 ${
                 isDark ? 'text-gray-100' : 'text-gray-900'
@@ -335,17 +335,17 @@ export default function Home() {
         {loading && <SkeletonLoader isDark={isDark} />}
 
         {data && !loading && (
-          <div className={`rounded-2xl shadow-lg p-8 mb-8 animate-fade-in ${
+          <div className={`rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 animate-fade-in ${
             isDark ? 'bg-gray-800' : 'bg-white'
           }`}>
             <div className="space-y-6">
             <div>
-                <h3 className={`text-lg font-bold mb-4 ${
+                <h3 className={`text-base sm:text-lg font-bold mb-3 sm:mb-4 ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>
                   Playlist Details
                 </h3>
-                <p className={`text-2xl font-bold mb-2 ${
+                <p className={`text-xl sm:text-2xl font-bold mb-2 break-words ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>
                   {data.playlistTitle}
@@ -358,10 +358,10 @@ export default function Home() {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t" style={{
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8 pt-6 sm:pt-8 border-t" style={{
                 borderColor: isDark ? '#404854' : '#e5e7eb'
               }}>
-                <div className={`p-5 rounded-xl transition-all ${
+                <div className={`p-4 sm:p-5 rounded-xl transition-all ${
                   isDark ? 'bg-gray-700/40' : 'bg-linear-to-br from-red-50 to-orange-50'
                 }`}>
                   <div className={`text-xs font-semibold mb-2 opacity-60 ${
@@ -369,13 +369,13 @@ export default function Home() {
                   }`}>
                     Total Videos
                   </div>
-                  <div className={`text-3xl font-bold ${
+                  <div className={`text-2xl sm:text-3xl font-bold ${
                     isDark ? 'text-red-400' : 'text-red-600'
                   }`}>
                     <AnimatedNumber value={data.totalVideos} />
                   </div>
                 </div>
-                <div className={`p-5 rounded-xl transition-all ${
+                <div className={`p-4 sm:p-5 rounded-xl transition-all ${
                   isDark ? 'bg-gray-700/40' : 'bg-linear-to-br from-red-50 to-orange-50'
                 }`}>
                   <div className={`text-xs font-semibold mb-2 opacity-60 ${
@@ -383,7 +383,7 @@ export default function Home() {
                   }`}>
                     Range
                   </div>
-                  <div className={`text-lg font-bold mb-1 ${
+                  <div className={`text-base sm:text-lg font-bold mb-1 ${
                     isDark ? 'text-white' : 'text-gray-900'
                   }`}>
                     {data.range}
@@ -394,7 +394,7 @@ export default function Home() {
                     {data.rangeVideos} videos
                   </div>
                 </div>
-                <div className={`p-5 rounded-xl transition-all ${
+                <div className={`p-4 sm:p-5 rounded-xl transition-all ${
                   isDark ? 'bg-gray-700/40' : 'bg-linear-to-br from-red-50 to-orange-50'
                 }`}>
                   <div className={`text-xs font-semibold mb-2 opacity-60 ${
@@ -402,7 +402,7 @@ export default function Home() {
                   }`}>
                     Average Duration
                   </div>
-                  <div className={`text-lg font-bold ${
+                  <div className={`text-base sm:text-lg font-bold ${
                     isDark ? 'text-white' : 'text-gray-900'
                   }`}>
                     {formatTime(data.averageVideo)}
@@ -411,21 +411,21 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-4 mt-8">
-              <h3 className={`text-lg font-bold flex items-center gap-3 ${
+            <div className="space-y-3 sm:space-y-4 mt-6 sm:mt-8">
+              <h3 className={`text-base sm:text-lg font-bold flex items-center gap-2 sm:gap-3 ${
                 isDark ? 'text-white' : 'text-gray-900'
               }`}>
                 <Clock className={`w-5 h-5 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
                 Total Watch Time
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {Object.entries(data.total).map(([speed, duration]) => {
                   const formatted = formatTime(duration);
                   const isObject = typeof formatted === 'object';
                   return (
                     <div
                       key={speed}
-                      className={`p-4 rounded-xl border transition-all duration-200 hover:scale-105 hover:shadow-md cursor-pointer ${
+                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-200 hover:scale-105 hover:shadow-md cursor-pointer ${
                         isDark 
                           ? 'bg-gray-700/40 border-gray-600' 
                           : 'bg-linear-to-br from-red-50 to-orange-50 border-red-200'
@@ -443,14 +443,14 @@ export default function Home() {
                           }`}>
                             {formatted.approx}
                           </div>
-                          <div className={`text-base font-bold ${
+                          <div className={`text-sm sm:text-base font-bold break-words ${
                             isDark ? 'text-white' : 'text-red-700'
                           }`}>
                             {formatted.full}
                           </div>
                         </div>
                       ) : (
-                        <div className={`text-base font-bold ${
+                        <div className={`text-sm sm:text-base font-bold break-words ${
                           isDark ? 'text-white' : 'text-red-700'
                         }`}>
                           {formatted}
@@ -463,10 +463,10 @@ export default function Home() {
             </div>
 
             {/* Study Planner Toggle */}
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-6 sm:mt-8">
               <button
                 onClick={() => setShowExamPlanner(!showExamPlanner)}
-                className={`px-8 py-3 rounded-lg font-semibold text-white transition-all flex items-center gap-2 shadow-md hover:shadow-lg active:scale-95 ${
+                className={`w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg font-semibold text-white transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-95 ${
                   isDark ? 'bg-red-600 hover:bg-red-700' : 'bg-red-600 hover:bg-red-700'
                 }`}
               >
@@ -477,10 +477,10 @@ export default function Home() {
 
             {/* Study Planner Section */}
             {showExamPlanner && (
-              <div className={`rounded-2xl shadow-lg p-8 mt-8 animate-fade-in ${
+              <div className={`rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mt-6 sm:mt-8 animate-fade-in ${
                 isDark ? 'bg-gray-800' : 'bg-white'
               }`}>
-                <h4 className={`text-xl font-bold mb-8 ${
+                <h4 className={`text-lg sm:text-xl font-bold mb-6 sm:mb-8 ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>
                   📅 Study Schedule
@@ -530,7 +530,7 @@ export default function Home() {
                     }`}>
                       Study Speed
                     </label>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {["1x", "1.25x", "1.5x", "2x"].map((speed) => (
                         <button
                           key={speed}
@@ -551,8 +551,8 @@ export default function Home() {
                 </div>
 
                 {plan && (
-                  <div className="space-y-6">
-                    <div className={`p-6 rounded-xl grid grid-cols-3 gap-4 ${
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className={`p-4 sm:p-6 rounded-xl grid grid-cols-1 sm:grid-cols-3 gap-4 ${
                       isDark ? 'bg-gray-700/40' : 'bg-linear-to-br from-red-50 to-orange-50'
                     }`}>
                       <div className="text-center">
@@ -561,7 +561,7 @@ export default function Home() {
                         }`}>
                           Study Days
                         </div>
-                        <div className={`text-3xl font-bold ${
+                        <div className={`text-2xl sm:text-3xl font-bold ${
                           isDark ? 'text-red-400' : 'text-red-600'
                         }`}>
                           {plan.studyDays}
@@ -573,7 +573,7 @@ export default function Home() {
                         }`}>
                           Total Hours
                         </div>
-                        <div className={`text-sm font-bold ${
+                        <div className={`text-xs sm:text-sm font-bold break-words ${
                           isDark ? 'text-white' : 'text-gray-900'
                         }`}>
                           {plan.needed}
@@ -585,7 +585,7 @@ export default function Home() {
                         }`}>
                           Per Day
                         </div>
-                        <div className={`text-xl font-bold ${
+                        <div className={`text-lg sm:text-xl font-bold ${
                           isDark ? 'text-red-400' : 'text-red-600'
                         }`}>
                           {plan.perDay}
@@ -637,7 +637,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <div className={`mt-20 text-center text-sm transition-colors duration-300 ${
+      <div className={`mt-12 sm:mt-20 text-center text-xs sm:text-sm px-4 transition-colors duration-300 ${
         isDark ? 'text-gray-500 hover:text-gray-400' : 'text-gray-600 hover:text-gray-900'
       }`}>
         <p className="font-medium">
