@@ -28,7 +28,7 @@ export const metadata = {
     description: "Analyze YouTube playlists and get detailed statistics, video insights, and engagement metrics.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
   },
 };
 

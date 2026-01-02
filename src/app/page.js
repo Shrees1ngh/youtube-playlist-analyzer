@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Clock, Play, Video, AlertCircle, Loader2, Calendar, Moon, Sun } from 'lucide-react';
+import { Clock, Play, AlertCircle, Loader2, Calendar, Moon, Sun } from 'lucide-react';
 import AnimatedNumber from './AnimatedNumber';
 import SkeletonLoader from './SkeletonLoader';
+import Image from 'next/image';
 
 export default function Home() {
   const [theme, setTheme] = useState("light");
@@ -192,7 +193,7 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 relative">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <Video className={`w-10 h-10 sm:w-12 sm:h-12 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+            <Image src="/logo.svg" alt="Logo" width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12" priority />
             <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-950'}`}>
               YouTube Playlist Analyzer
             </h1>
@@ -345,7 +346,7 @@ export default function Home() {
                 }`}>
                   Playlist Details
                 </h3>
-                <p className={`text-xl sm:text-2xl font-bold mb-2 break-words ${
+                <p className={`text-xl sm:text-2xl font-bold mb-2 wrap-break-word ${
                   isDark ? 'text-white' : 'text-gray-900'
                 }`}>
                   {data.playlistTitle}
@@ -443,14 +444,14 @@ export default function Home() {
                           }`}>
                             {formatted.approx}
                           </div>
-                          <div className={`text-sm sm:text-base font-bold break-words ${
+                          <div className={`text-sm sm:text-base font-bold wrap-break-word ${
                             isDark ? 'text-white' : 'text-red-700'
                           }`}>
                             {formatted.full}
                           </div>
                         </div>
                       ) : (
-                        <div className={`text-sm sm:text-base font-bold break-words ${
+                        <div className={`text-sm sm:text-base font-bold wrap-break-word ${
                           isDark ? 'text-white' : 'text-red-700'
                         }`}>
                           {formatted}
@@ -573,7 +574,7 @@ export default function Home() {
                         }`}>
                           Total Hours
                         </div>
-                        <div className={`text-xs sm:text-sm font-bold break-words ${
+                        <div className={`text-xs sm:text-sm font-bold wrap-break-word ${
                           isDark ? 'text-white' : 'text-gray-900'
                         }`}>
                           {plan.needed}
