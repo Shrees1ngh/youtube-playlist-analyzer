@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: linear-gradient(180deg, #fff5f5, #ffffff);
+  --card-bg: #ffffff;
+  --foreground: #0f172a;
+  --text-secondary: #475569;
+
+  --border: #e5e7eb;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+
+  --button-primary: #ef4444;
+  --button-primary-hover: #dc2626;
+
+  --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+[data-theme="dark"] {
+  --background: linear-gradient(180deg, #020617, #020617);
+  --card-bg: #1a1f2e;
+  --foreground: #f8fafc;
+  --text-secondary: #cbd5e1;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --border: #1e293b;
+  --input-bg: #020617;
+  --input-border: #1e293b;
+
+  --button-primary: #ef4444;
+  --button-primary-hover: #dc2626;
+
+  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes theme-flash-in {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes moon-sparkle {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(59, 130, 246, 0));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8)) drop-shadow(2px 2px 4px rgba(59, 130, 246, 0.6));
+    transform: scale(1.1);
+  }
+}
+
+@keyframes moon-fill {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(0.3) invert(1);
+  }
+}
+
+@keyframes cloud-fill {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sun-rise {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(250, 204, 21, 0));
+    transform: translateY(0);
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.8)) drop-shadow(0 4px 8px rgba(250, 204, 21, 0.6));
+    transform: translateY(-8px);
+  }
+  100% {
+    filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.4));
+    transform: translateY(0);
+  }
+}
+
+@keyframes sun-set {
+  0% {
+    filter: drop-shadow(0 0 4px rgba(250, 204, 21, 0.4));
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px rgba(250, 204, 21, 0));
+    transform: translateY(8px) rotate(180deg);
+  }
+}
+
+@keyframes moon-rise {
+  0% {
+    filter: brightness(0.3) invert(1);
+    transform: translateY(8px);
+  }
+  100% {
+    filter: brightness(1) invert(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes sun-glow {
+  0%, 100% {
+    box-shadow: inset 0 0 0px rgba(250, 204, 21, 0);
+  }
+  50% {
+    box-shadow: inset 0 0 12px rgba(250, 204, 21, 0.3), 0 0 20px rgba(250, 204, 21, 0.2);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-moon-sparkle {
+  animation: moon-sparkle 0.6s ease-in-out;
+}
+
+.animate-moon-fill {
+  animation: moon-fill 0.5s ease-in-out forwards;
+}
+
+.animate-cloud-fill {
+  animation: cloud-fill 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-sun-rise {
+  animation: sun-rise 0.6s ease-in-out;
+}
+
+.animate-sun-set {
+  animation: sun-set 0.6s ease-in-out;
+}
+
+.animate-moon-rise {
+  animation: moon-rise 0.6s ease-in-out;
+}
+
+.animate-sun-glow {
+  animation: sun-glow 0.6s ease-in-out;
+}
+
+/* Skeleton loader */
+.skeleton-base {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes theme-flash-light {
+  0% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes theme-flash-dark {
+  0% {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  100% {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.animate-theme-flash-light {
+  animation: theme-flash-light 0.6s ease-out forwards;
+}
+
+.animate-theme-flash-dark {
+  animation: theme-flash-dark 0.6s ease-out forwards;
 }
