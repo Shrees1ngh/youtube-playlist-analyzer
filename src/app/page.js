@@ -193,7 +193,7 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 relative">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <Image src="/logo.svg" alt="Logo" width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12" priority />
+            <Image src="/logo.svg" alt="Logo" width={64} height={64} className="w-14 h-14 sm:w-16 sm:h-16" priority />
             <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-950'}`}>
               YouTube Playlist Analyzer
             </h1>
