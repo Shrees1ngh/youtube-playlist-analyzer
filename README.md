@@ -87,17 +87,18 @@ You can also add the extension to your mobile homescreen:
 
 1. Navigate to any YouTube playlist
 2. Click the **YouTube Playlist Analyzer** extension icon
-3. The extension will auto-detect the playlist URL
-4. Click **Analyze** to get metrics:
+3. The playlist URL will be **automatically detected** and filled in
+4. Click **Analyze** to get instant metrics:
    - Total number of videos
-   - Total watch time at 1x speed
+   - Watch time at multiple speeds (1x, 1.25x, 1.5x, 2x)
    - Video range analyzed
 
 ### How It Works
 
-- The extension communicates with the deployed Vercel API
+- The extension automatically detects playlist URLs from the current tab
+- Uses a background service worker to communicate with the deployed Vercel API
 - **No API keys are stored** in the extension (secure by design)
-- Playlist analysis requests are sent to the backend API
+- Results are displayed instantly in a clean, modern interface
 - Results are displayed in the extension popup
 
 ## Building for Production

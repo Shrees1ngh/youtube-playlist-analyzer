@@ -118,6 +118,34 @@
       .pill span {
         color: var(--text);
       }
+      .speed-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .speed-card {
+        padding: 10px;
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .speed-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+      }
+      .speed-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .speed-time {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+      }
     </style>
   </head>
   <body>
@@ -130,10 +158,7 @@
       <div class="card">
         <label for="playlistUrl">Playlist URL</label>
         <input id="playlistUrl" type="text" placeholder="https://www.youtube.com/playlist?list=..." autocomplete="off" />
-        <div class="row" style="margin-top: 10px; align-items: center;">
-          <button id="detectBtn" type="button">Auto-detect tab</button>
-          <button id="analyzeBtn" type="button" style="flex: 1; min-width: 120px;">Analyze</button>
-        </div>
+        <button id="analyzeBtn" type="button" style="margin-top: 10px; width: 100%;">Analyze</button>
         <p class="muted" style="margin-top: 6px;">Data is fetched from the Vercel backend; no API keys are stored in this extension.</p>
         <div id="status" class="status"></div>
         <div id="result" class="result"></div>
