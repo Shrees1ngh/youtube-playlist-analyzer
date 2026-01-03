@@ -10,6 +10,9 @@ A modern web application that analyzes YouTube playlists, extracting detailed me
 - 🌙 Dark/Light theme with smooth animations
 - 📱 Fully responsive design
 - ⚡ Real-time analysis with skeleton loading states
+- 🔌 Chrome Extension for quick analysis from YouTube directly
+  - One-click playlist detection on YouTube.com
+  - Secure analysis via deployed Vercel API (no API keys stored locally)
 
 ## Tech Stack
 
@@ -61,6 +64,43 @@ A modern web application that analyzes YouTube playlists, extracting detailed me
 npm run build
 npm start
 ```
+
+## Chrome Extension
+
+> **Note:** The extension is currently available for local development only. It has not been uploaded to the Chrome Web Store yet.
+
+### Installation (Local Development)
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **Developer mode** (toggle in top-right corner)
+3. Click **Load unpacked**
+4. Select the `extension/` folder in this repository
+
+### Add to Homescreen (Mobile)
+
+You can also add the extension to your mobile homescreen:
+- Open the popup in Chrome
+- Tap the menu icon and select **Add to Home screen**
+- The extension will appear as a shortcut on your device
+
+### Usage
+
+1. Navigate to any YouTube playlist
+2. Click the **YouTube Playlist Analyzer** extension icon
+3. The extension will auto-detect the playlist URL
+4. Click **Analyze** to get metrics:
+   - Total number of videos
+   - Total watch time at 1x speed
+   - Video range analyzed
+
+### How It Works
+
+- The extension communicates with the deployed Vercel API
+- **No API keys are stored** in the extension (secure by design)
+- Playlist analysis requests are sent to the backend API
+- Results are displayed in the extension popup
+
+## Building for Production
 
 ## Deployment
 
