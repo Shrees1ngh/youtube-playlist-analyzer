@@ -11,9 +11,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1224" },
+  ],
+};
+
 export const metadata = {
-  title: "YouTube Playlist Analyzer - Calculate Watch Time & Duration",
+  title: {
+    default: "YouTube Playlist Analyzer - Calculate Watch Time & Duration",
+    template: "%s | YouTube Playlist Analyzer",
+  },
   description: "Calculate total watch time, average duration, and plan study sessions with the YouTube Playlist Analyzer. Instantly analyze any YouTube playlist to get detailed statistics and insights.",
+  applicationName: "YouTube Playlist Analyzer",
+  manifest: "/manifest.json",
   keywords: [
     "YouTube Playlist Analyzer",
     "YT Playlist Analyzer",

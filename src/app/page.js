@@ -9,8 +9,8 @@ export default function Home() {
   const [theme, setTheme] = useState("light");
   const [isAnimating, setIsAnimating] = useState(false);
   const [url, setUrl] = useState("");
-  const [start, setStart] = useState(1);
-  const [end, setEnd] = useState(0);
+  const [start, setStart] = useState("1");
+  const [end, setEnd] = useState("0");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,10 +47,15 @@ export default function Home() {
     setData(null);
 
     try {
+      const startValue = parseInt(start, 10);
+      const endValue = parseInt(end, 10);
+      const safeStart = Number.isNaN(startValue) || startValue < 1 ? 1 : startValue;
+      const safeEnd = Number.isNaN(endValue) || endValue < 0 ? 0 : endValue;
+
       const qs = new URLSearchParams({ 
         url: url.trim(), 
-        start: String(start), 
-        end: String(end) 
+        start: String(safeStart), 
+        end: String(safeEnd) 
       });
       const res = await fetch(`/api/analyze?${qs}`);
       const json = await res.json();
@@ -189,7 +194,7 @@ export default function Home() {
         }`} />
       )}
       
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10 px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 relative">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
@@ -285,7 +290,11 @@ export default function Home() {
               <input
                 type="number"
                 value={start}
-                onChange={(e) => setStart(Math.max(1, parseInt(e.target.value) || 1))}
+                onChange={(e) => setStart(e.target.value)}
+                onBlur={(e) => {
+                  const n = parseInt(e.target.value, 10);
+                  setStart((Number.isNaN(n) || n < 1 ? 1 : n).toString());
+                }}
                 min="1"
                 placeholder="1"
                 className={`w-full px-4 py-2.5 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none ${
@@ -304,7 +313,11 @@ export default function Home() {
               <input
                 type="number"
                 value={end}
-                onChange={(e) => setEnd(Math.max(0, parseInt(e.target.value) || 0))}
+                onChange={(e) => setEnd(e.target.value)}
+                onBlur={(e) => {
+                  const n = parseInt(e.target.value, 10);
+                  setEnd((Number.isNaN(n) || n < 0 ? 0 : n).toString());
+                }}
                 min="0"
                 placeholder="Last video"
                 className={`w-full px-4 py-2.5 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none ${
@@ -419,7 +432,7 @@ export default function Home() {
                 <Clock className={`w-5 h-5 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
                 Total Watch Time
               </h3>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {Object.entries(data.total).map(([speed, duration]) => {
                   const formatted = formatTime(duration);
                   const isObject = typeof formatted === 'object';

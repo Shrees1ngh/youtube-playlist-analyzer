@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YT Analyzer</title>
+    <style>
+      :root {
+        --bg: #0b1224;
+        --panel: #11182d;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #ef4444;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        width: 360px;
+        background: var(--bg);
+        color: var(--text);
+        font: 14px/1.5 "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+      .shell {
+        padding: 16px;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 18px;
+      }
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .card {
+        margin-top: 12px;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+      }
+      input:focus {
+        outline: 2px solid rgba(239, 68, 68, 0.65);
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-weight: 700;
+        color: var(--text);
+        background: var(--accent);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+      button:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(239, 68, 68, 0.35);
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .status {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        min-height: 22px;
+      }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: none;
+      }
+      .result.show {
+        display: block;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 9999px;
+        background: rgba(239, 68, 68, 0.14);
+        color: #fecdd3;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .pill span {
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div>
+        <h1>YT Analyzer</h1>
+        <p class="muted">Quickly check playlist watch time using the deployed API.</p>
+      </div>
+
+      <div class="card">
+        <label for="playlistUrl">Playlist URL</label>
+        <input id="playlistUrl" type="text" placeholder="https://www.youtube.com/playlist?list=..." autocomplete="off" />
+        <div class="row" style="margin-top: 10px; align-items: center;">
+          <button id="detectBtn" type="button">Auto-detect tab</button>
+          <button id="analyzeBtn" type="button" style="flex: 1; min-width: 120px;">Analyze</button>
+        </div>
+        <p class="muted" style="margin-top: 6px;">Data is fetched from the Vercel backend; no API keys are stored in this extension.</p>
+        <div id="status" class="status"></div>
+        <div id="result" class="result"></div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

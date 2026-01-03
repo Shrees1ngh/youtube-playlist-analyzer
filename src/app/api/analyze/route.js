@@ -38,12 +38,20 @@ export async function GET(req) {
   }
 
   const API_KEY = process.env.YOUTUBE_API_KEY;
+  if (!API_KEY) {
+    return NextResponse.json({ error: "Server is missing YOUTUBE_API_KEY. Please add it to your environment variables." }, { status: 500 });
+  }
 
   /* Playlist title */
   const infoRes = await fetch(
     `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${API_KEY}`
   );
   const info = await infoRes.json();
+  if (!infoRes.ok) {
+    const message = info?.error?.message || "Unable to fetch playlist details";
+    return NextResponse.json({ error: message }, { status: infoRes.status || 500 });
+  }
+
   const playlistTitle = info.items?.[0]?.snippet?.title || "Unknown Playlist";
   const channelName = info.items?.[0]?.snippet?.channelTitle || "Unknown Creator";
 
@@ -56,6 +64,12 @@ export async function GET(req) {
       `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&pageToken=${token}&key=${API_KEY}`
     );
     const data = await res.json();
+
+    if (!res.ok) {
+      const message = data?.error?.message || "Failed to fetch playlist items";
+      return NextResponse.json({ error: message }, { status: res.status || 500 });
+    }
+
     if (!data.items) break;
     data.items.forEach(v => ids.push(v.contentDetails.videoId));
     token = data.nextPageToken;
@@ -74,6 +88,12 @@ export async function GET(req) {
       `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chunk.join(",")}&key=${API_KEY}`
     );
     const data = await res.json();
+
+    if (!res.ok) {
+      const message = data?.error?.message || "Failed to fetch video durations";
+      return NextResponse.json({ error: message }, { status: res.status || 500 });
+    }
+
     data.items?.forEach(v => {
       totalSeconds += isoToSeconds(v.contentDetails.duration);
     });

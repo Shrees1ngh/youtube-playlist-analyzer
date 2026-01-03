@@ -1,0 +1,21 @@
+{
+  "name": "YouTube Playlist Analyzer",
+  "short_name": "YT Analyzer",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0b1224",
+  "background_color": "#0b1224",
+  "description": "Analyze YouTube playlists to get total watch time, duration ranges, and study planning insights without exposing API keys.",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
